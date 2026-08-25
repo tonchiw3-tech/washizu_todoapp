@@ -3,6 +3,8 @@ package com.example.todoapp;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class HomeController {
@@ -23,5 +25,21 @@ public class HomeController {
     public String todos(Model model) {
         model.addAttribute("todos", todoMapper.findAll());
         return "todos";
+    }
+
+    @GetMapping("/todos/new")
+    public String newTodo(Model model) {
+        model.addAttribute("todo", new Todo());
+        return "create";
+    }
+
+    @PostMapping("/todos/new")
+    public String rewriteTodo(@ModelAttribute("todo") Todo todo) {
+        return "create";
+    }
+
+    @PostMapping("/todos/confirm")
+    public String confirmTodo(@ModelAttribute("todo") Todo todo) {
+        return "create-confirm";
     }
 }
