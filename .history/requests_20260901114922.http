@@ -39,4 +39,4 @@ GET https://holidays-jp.github.io/api/v1/date.json
 GET http://localhost:8080/api/holidays
 
 ###７．期限の範囲で絞れるようにする
-GET  http://localhost:8080/api/todos?from=2026-09-01&to=2026-09-30
+GET /api/todos?from=2026-04-01&to=2026-04-30

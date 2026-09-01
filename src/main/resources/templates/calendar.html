@@ -38,4 +38,24 @@
         </table>
     </main>
 </body>
+<script>
+    async function insertTodosIntoCalendar() {
+        const calendarTable = document.querySelector('.calendar-table');
+        const from = calendarTable.dataset.from;
+        const to = calendarTable.dataset.to;
+        const res = await fetch(`/api/todos?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`);
+        const todos = await res.json();
+
+        for (const cell of calendarTable.querySelectorAll('td[data-date]')) {
+            const date = cell.dataset.date;
+            for (const todo of todos) {
+                if (todo.dueDate === date) {
+                    cell.append(document.createElement('br'), document.createTextNode(todo.title));
+                }
+            }
+        }
+    }
+
+    insertTodosIntoCalendar();
+</script>
 </html>
