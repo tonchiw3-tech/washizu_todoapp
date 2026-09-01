@@ -45,6 +45,16 @@
     </main>
 </body>
 <script>
+    function reorderCalendarToMondayStart() {
+        for (const row of document.querySelectorAll('.calendar-table tr')) {
+            const cells = Array.from(row.children);
+            for (const cell of cells.slice(1)) {
+                row.append(cell);
+            }
+            row.append(cells[0]);
+        }
+    }
+
     async function insertTodosIntoCalendar() {
         const calendarTable = document.querySelector('.calendar-table');
         const from = calendarTable.dataset.from;
@@ -106,6 +116,7 @@
         }
     }
 
+    reorderCalendarToMondayStart();
     insertTodosIntoCalendar();
     colorCalendarByHolidays();
 </script>
