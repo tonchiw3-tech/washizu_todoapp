@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>カレンダー</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <main class="container">
+        <h1 class="page-title" th:text="${displayYear + '年' + displayMonth + '月'}">2026年4月</h1>
+
+        <nav class="calendar-navigation" aria-label="月の移動">
+            <a class="btn sub" th:href="@{/calendar(year=${previousMonth.year}, month=${previousMonth.monthValue})}">前の月</a>
+            <a class="btn sub" th:href="@{/calendar(year=${nextMonth.year}, month=${nextMonth.monthValue})}">次の月</a>
+        </nav>
+
+        <table class="calendar-table" th:attr="data-from=${firstDay},data-to=${lastDay}">
+            <thead>
+                <tr>
+                    <th scope="col">日</th>
+                    <th scope="col">月</th>
+                    <th scope="col">火</th>
+                    <th scope="col">水</th>
+                    <th scope="col">木</th>
+                    <th scope="col">金</th>
+                    <th scope="col">土</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="week : ${calendarWeeks}">
+                    <th:block th:each="day : ${week}">
+                        <td th:if="${day == null}"></td>
+                        <td th:unless="${day == null}" th:attr="data-date=${day}" th:text="${day.dayOfMonth}"></td>
+                    </th:block>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>
