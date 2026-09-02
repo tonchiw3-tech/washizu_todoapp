@@ -57,7 +57,10 @@
                     th:classappend="${todo.dueDate != null and todo.dueDate.isBefore(#temporals.createToday()) and !todo.completed} ? ' overdue'">
                     <td th:text="${todo.title}">やること</td>
                     <td th:text="${todo.category}">ジャンル</td>
-                    <td th:text="${todo.priority == 1 ? '高' : (todo.priority == 2 ? '中' : '低')}">優先度</td>
+                    <td>
+                        <span th:text="${todo.priority == 1 ? '高' : (todo.priority == 2 ? '中' : '低')}">優先度</span>
+                        <span class="priority-mark" th:if="${todo.priority == 1}" aria-label="最優先">★</span>
+                    </td>
                     <td th:text="${todo.dueDate != null ? todo.dueDate : '（入力なし）'}">期限</td>
                     <td th:text="${todo.completed ? '完了' : '未完了'}">状態</td>
                     <td>
