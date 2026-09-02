@@ -8,7 +8,9 @@ import org.springframework.http.client.JdkClientHttpRequestFactory;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestClient;
+import org.springframework.stereotype.Component;
 
+@Component
 public class HolidayClient {
 
     private static final String HOLIDAYS_API_URL = "https://holidays-jp.github.io/api/v1/date.json";
