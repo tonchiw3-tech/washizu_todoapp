@@ -6,6 +6,7 @@ CREATE TABLE todos (
     priority INT NOT NULL DEFAULT 2,
     due_date DATE NULL,
     completed BOOLEAN NOT NULL DEFAULT FALSE,
+    completed_at DATETIME NULL,
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
@@ -39,3 +40,5 @@ INSERT INTO todos (title, detail, category, priority, due_date, completed) VALUE
     ('todo-13', NULL, '繝・じ繧､繝ｳ', 2, NULL, FALSE),
     ('todo-14', NULL, '繝・じ繧､繝ｳ', 2, NULL, FALSE),
     ('todo-15', NULL, '繝・じ繧､繝ｳ', 2, NULL, FALSE);
+
+UPDATE todos SET completed = TRUE, completed_at = '2026-04-05 00:00:00' WHERE title = 'todo-06';
