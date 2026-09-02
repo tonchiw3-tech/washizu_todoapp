@@ -27,3 +27,15 @@ CREATE TABLE todos (
 ) ENGINE = InnoDB
   DEFAULT CHARACTER SET utf8mb4
   COLLATE utf8mb4_unicode_ci;
+
+INSERT INTO todos (title, detail, category, priority, due_date, completed) VALUES
+    ('todo-06', NULL, '繝・じ繧､繝ｳ', 2, NULL, FALSE),
+    ('todo-07', NULL, '繝・じ繧､繝ｳ', 2, NULL, FALSE),
+    ('todo-08', NULL, '繝・じ繧､繝ｳ', 2, NULL, FALSE),
+    ('todo-09', NULL, '繝・じ繧､繝ｳ', 2, NULL, FALSE),
+    ('todo-10', NULL, '繝・じ繧､繝ｳ', 2, NULL, FALSE),
+    ('todo-11', NULL, '繝・じ繧､繝ｳ', 2, NULL, FALSE),
+    ('todo-12', NULL, '繝・じ繧､繝ｳ', 2, NULL, FALSE),
+    ('todo-13', NULL, '繝・じ繧､繝ｳ', 2, NULL, FALSE),
+    ('todo-14', NULL, '繝・じ繧､繝ｳ', 2, NULL, FALSE),
+    ('todo-15', NULL, '繝・じ繧､繝ｳ', 2, NULL, FALSE);

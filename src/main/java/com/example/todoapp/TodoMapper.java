@@ -13,7 +13,16 @@ public interface TodoMapper {
                       @Param("category") String category,
                       @Param("order") String order,
                       @Param("from") LocalDate from,
-                      @Param("to") LocalDate to);
+                      @Param("to") LocalDate to,
+                      @Param("completedOnly") Boolean completedOnly,
+                      @Param("limit") int limit,
+                      @Param("offset") int offset);
+
+    int countSearch(@Param("keyword") String keyword,
+                    @Param("category") String category,
+                    @Param("from") LocalDate from,
+                    @Param("to") LocalDate to,
+                    @Param("completedOnly") Boolean completedOnly);
 
     Todo findById(Long id);
 

@@ -15,6 +15,9 @@
             <if test="category != null and category != ''">
                 AND category = #{category}
             </if>
+            <if test="completedOnly == true">
+                AND completed = FALSE
+            </if>
             <if test="from != null">
                 AND due_date &gt;= #{from}
             </if>
@@ -31,6 +34,18 @@
                 due_date ASC, id ASC
             </otherwise>
         </choose>
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <select id="countSearch" resultType="int">
+        SELECT COUNT(*) FROM todos
+        <where>
+            <if test="keyword != null and keyword != ''">AND title LIKE CONCAT('%', #{keyword}, '%')</if>
+            <if test="category != null and category != ''">AND category = #{category}</if>
+            <if test="completedOnly == true">AND completed = FALSE</if>
+            <if test="from != null">AND due_date &gt;= #{from}</if>
+            <if test="to != null">AND due_date &lt;= #{to}</if>
+        </where>
     </select>
 
     <select id="findById" resultType="com.example.todoapp.Todo">
