@@ -39,6 +39,7 @@
             <a class="btn" th:href="@{/todos/new}">新規登録</a>
             <a class="btn sub" href="/todos?trash=1" th:unless="${trash}">削除済み</a>
             <a class="btn sub" th:href="@{/calendar}">カレンダーで見る</a>
+            <a class="btn sub" th:href="@{/api/todos.csv(keyword=${keyword}, category=${category}, order=${order}, includeCompleted=${includeCompleted})}">CSVで書き出す</a>
         </p>
         <p th:if="${trash}"><a class="btn sub" href="/todos">通常一覧</a></p>
 
