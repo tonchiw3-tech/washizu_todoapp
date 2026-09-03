@@ -83,4 +83,5 @@ public class TodoService {
     public Todo findDeletedById(Long id) { return todoMapper.findDeletedById(id); }
 
     public void restore(Long id) { todoMapper.restoreById(id); }
+    public void togglePinned(Long id, Boolean pinned) { todoMapper.togglePinned(id, pinned); }
 }

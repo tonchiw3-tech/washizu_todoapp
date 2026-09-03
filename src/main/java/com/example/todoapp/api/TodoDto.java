@@ -16,6 +16,7 @@ public class TodoDto {
     private String category;
     private Integer priority;
     private LocalDate dueDate;
+    private Boolean pinned;
     private Boolean completed;
     private LocalDateTime completedAt;
     private LocalDateTime createdAt;
@@ -29,6 +30,7 @@ public class TodoDto {
         dto.setCategory(todo.getCategory());
         dto.setPriority(todo.getPriority());
         dto.setDueDate(todo.getDueDate());
+        dto.setPinned(todo.getPinned());
         dto.setCompleted(todo.getCompleted());
         dto.setCompletedAt(todo.getCompletedAt());
         dto.setCreatedAt(todo.getCreatedAt());

@@ -48,6 +48,9 @@ body {
     font-weight: bold;
 }
 
+.pin-form { display: flex; align-items: center; gap: 6px; }
+.pin-button { border: 0; padding: 0; background: transparent; color: #facc15; font-size: 20px; cursor: pointer; }
+
 .todo-table tr.overdue td {
     background: #422006;
 }

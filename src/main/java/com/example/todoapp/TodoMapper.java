@@ -37,4 +37,5 @@ public interface TodoMapper {
     void deleteById(Long id);
 
     void restoreById(Long id);
+    void togglePinned(@Param("id") Long id, @Param("pinned") Boolean pinned);
 }

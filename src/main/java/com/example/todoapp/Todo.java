@@ -30,6 +30,7 @@ public class Todo {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dueDate;
+    private Boolean pinned;
 
     private Boolean completed;
     private LocalDateTime completedAt;

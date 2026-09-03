@@ -5,7 +5,7 @@
 <mapper namespace="com.example.todoapp.TodoMapper">
 
     <select id="search" resultType="com.example.todoapp.Todo">
-        SELECT id, title, detail, category, priority, due_date, completed, completed_at,
+        SELECT id, title, detail, category, priority, due_date, pinned, completed, completed_at,
                created_at, updated_at, deleted_at
         FROM todos
         <where>
@@ -26,7 +26,7 @@
                 AND due_date &lt;= #{to}
             </if>
         </where>
-        ORDER BY due_date IS NULL,
+        ORDER BY pinned DESC, due_date IS NULL,
         <choose>
             <when test="order == 'desc'">
                 due_date DESC, id DESC
@@ -51,14 +51,14 @@
     </select>
 
     <select id="findById" resultType="com.example.todoapp.Todo">
-        SELECT id, title, detail, category, priority, due_date, completed, completed_at,
+        SELECT id, title, detail, category, priority, due_date, pinned, completed, completed_at,
                created_at, updated_at, deleted_at
         FROM todos
         WHERE id = #{id} AND deleted_at IS NULL
     </select>
 
     <select id="findDeletedById" resultType="com.example.todoapp.Todo">
-        SELECT id, title, detail, category, priority, due_date, completed, completed_at,
+        SELECT id, title, detail, category, priority, due_date, pinned, completed, completed_at,
                created_at, updated_at, deleted_at
         FROM todos WHERE id = #{id} AND deleted_at IS NOT NULL
     </select>
@@ -92,6 +92,11 @@
     <update id="restoreById">
         UPDATE todos SET deleted_at = NULL
         WHERE id = #{id} AND deleted_at IS NOT NULL
+    </update>
+
+    <update id="togglePinned">
+        UPDATE todos SET pinned = #{pinned}
+        WHERE id = #{id} AND deleted_at IS NULL
     </update>
 
 </mapper>

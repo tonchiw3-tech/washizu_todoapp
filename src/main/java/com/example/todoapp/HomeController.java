@@ -120,6 +120,21 @@ public class HomeController {
         return "edit";
     }
 
+    @PostMapping("/todos/{id}/pin")
+    public String togglePinned(@PathVariable Long id,
+                               @RequestParam(name = "keyword", defaultValue = "") String keyword,
+                               @RequestParam(name = "category", defaultValue = "") String category,
+                               @RequestParam(name = "order", defaultValue = "asc") String order,
+                               @RequestParam(name = "includeCompleted", defaultValue = "false") boolean includeCompleted,
+                               @RequestParam(name = "page", defaultValue = "1") int page) {
+        Todo todo = todoService.findById(id);
+        if (todo != null) todoService.togglePinned(id, !Boolean.TRUE.equals(todo.getPinned()));
+        return "redirect:/todos?keyword=" + java.net.URLEncoder.encode(keyword, java.nio.charset.StandardCharsets.UTF_8)
+                + "&category=" + java.net.URLEncoder.encode(category, java.nio.charset.StandardCharsets.UTF_8)
+                + "&order=" + java.net.URLEncoder.encode(order, java.nio.charset.StandardCharsets.UTF_8)
+                + "&includeCompleted=" + includeCompleted + "&page=" + page;
+    }
+
     @GetMapping("/todos/{id}/delete")
     public String deleteTodo(@PathVariable Long id,
                              Model model,
