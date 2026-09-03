@@ -12,8 +12,14 @@
 
         <nav class="calendar-navigation" aria-label="月の移動">
             <div class="calendar-navigation-group">
-                <a class="btn sub" th:href="@{/calendar(year=${previousMonth.year}, month=${previousMonth.monthValue})}">前の月</a>
-                <a class="btn sub" th:href="@{/calendar(year=${nextMonth.year}, month=${nextMonth.monthValue})}">次の月</a>
+                <a class="btn sub" th:if="${!weekView}" th:href="@{/calendar(year=${previousMonth.year}, month=${previousMonth.monthValue})}">前の月</a>
+                <a class="btn sub" th:if="${!weekView}" th:href="@{/calendar(year=${nextMonth.year}, month=${nextMonth.monthValue})}">次の月</a>
+                <a class="btn sub" th:if="${weekView}" th:href="@{/calendar(view='week', year=${previousWeek.year}, month=${previousWeek.monthValue}, day=${previousWeek.dayOfMonth})}">前の週</a>
+                <a class="btn sub" th:if="${weekView}" th:href="@{/calendar(view='week', year=${nextWeek.year}, month=${nextWeek.monthValue}, day=${nextWeek.dayOfMonth})}">次の週</a>
+            </div>
+            <div class="calendar-navigation-group">
+                <a class="btn sub" th:href="@{/calendar(year=${displayYear}, month=${displayMonth})}">月</a>
+                <a class="btn sub" th:href="@{/calendar(view='week', year=${displayYear}, month=${displayMonth}, day=${displayDay})}">週</a>
             </div>
             <div class="calendar-navigation-group">
                 <a class="btn sub" th:href="@{/todos}">表で見る</a>
@@ -45,16 +51,6 @@
     </main>
 </body>
 <script>
-    function reorderCalendarToMondayStart() {
-        for (const row of document.querySelectorAll('.calendar-table tr')) {
-            const cells = Array.from(row.children);
-            for (const cell of cells.slice(1)) {
-                row.append(cell);
-            }
-            row.append(cells[0]);
-        }
-    }
-
     async function insertTodosIntoCalendar() {
         const calendarTable = document.querySelector('.calendar-table');
         const from = calendarTable.dataset.from;
@@ -138,7 +134,6 @@
         }
     }
 
-    reorderCalendarToMondayStart();
     insertTodosIntoCalendar();
     colorCalendarByHolidays();
     insertWeatherIntoCalendar();
