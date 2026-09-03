@@ -15,6 +15,7 @@ public interface TodoMapper {
                       @Param("from") LocalDate from,
                       @Param("to") LocalDate to,
                       @Param("completedOnly") Boolean completedOnly,
+                      @Param("deletedOnly") Boolean deletedOnly,
                       @Param("limit") int limit,
                       @Param("offset") int offset);
 
@@ -22,13 +23,18 @@ public interface TodoMapper {
                     @Param("category") String category,
                     @Param("from") LocalDate from,
                     @Param("to") LocalDate to,
-                    @Param("completedOnly") Boolean completedOnly);
+                    @Param("completedOnly") Boolean completedOnly,
+                    @Param("deletedOnly") Boolean deletedOnly);
 
     Todo findById(Long id);
+
+    Todo findDeletedById(Long id);
 
     void insert(Todo todo);
 
     void update(Todo todo);
 
     void deleteById(Long id);
+
+    void restoreById(Long id);
 }

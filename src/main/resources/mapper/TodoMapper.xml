@@ -6,9 +6,10 @@
 
     <select id="search" resultType="com.example.todoapp.Todo">
         SELECT id, title, detail, category, priority, due_date, completed, completed_at,
-               created_at, updated_at
+               created_at, updated_at, deleted_at
         FROM todos
         <where>
+            <choose><when test="deletedOnly == true">AND deleted_at IS NOT NULL</when><otherwise>AND deleted_at IS NULL</otherwise></choose>
             <if test="keyword != null and keyword != ''">
                 AND title LIKE CONCAT('%', #{keyword}, '%')
             </if>
@@ -40,6 +41,7 @@
     <select id="countSearch" resultType="int">
         SELECT COUNT(*) FROM todos
         <where>
+            <choose><when test="deletedOnly == true">AND deleted_at IS NOT NULL</when><otherwise>AND deleted_at IS NULL</otherwise></choose>
             <if test="keyword != null and keyword != ''">AND title LIKE CONCAT('%', #{keyword}, '%')</if>
             <if test="category != null and category != ''">AND category = #{category}</if>
             <if test="completedOnly == true">AND completed = FALSE</if>
@@ -50,9 +52,15 @@
 
     <select id="findById" resultType="com.example.todoapp.Todo">
         SELECT id, title, detail, category, priority, due_date, completed, completed_at,
-               created_at, updated_at
+               created_at, updated_at, deleted_at
         FROM todos
-        WHERE id = #{id}
+        WHERE id = #{id} AND deleted_at IS NULL
+    </select>
+
+    <select id="findDeletedById" resultType="com.example.todoapp.Todo">
+        SELECT id, title, detail, category, priority, due_date, completed, completed_at,
+               created_at, updated_at, deleted_at
+        FROM todos WHERE id = #{id} AND deleted_at IS NOT NULL
     </select>
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
@@ -76,9 +84,14 @@
         WHERE id = #{id}
     </update>
 
-    <delete id="deleteById">
-        DELETE FROM todos
-        WHERE id = #{id}
-    </delete>
+    <update id="deleteById">
+        UPDATE todos SET deleted_at = CURRENT_TIMESTAMP
+        WHERE id = #{id} AND deleted_at IS NULL
+    </update>
+
+    <update id="restoreById">
+        UPDATE todos SET deleted_at = NULL
+        WHERE id = #{id} AND deleted_at IS NOT NULL
+    </update>
 
 </mapper>

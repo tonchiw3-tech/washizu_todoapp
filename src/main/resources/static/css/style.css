@@ -123,6 +123,8 @@ body {
     color: #f8fafc;
 }
 
+.restore-btn { color: #f8fafc; background: #334155; }
+
 .link {
     color: #7dd3fc;
     text-decoration: underline;
