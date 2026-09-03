@@ -88,6 +88,25 @@
         }
     }
 
+    let weatherByDate = {};
+
+    async function insertWeatherIntoCalendar() {
+        const calendarTable = document.querySelector('.calendar-table');
+        const from = calendarTable.dataset.from;
+        const to = calendarTable.dataset.to;
+        try {
+            const res = await fetch(`/api/weather?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`);
+            if (res.ok) weatherByDate = await res.json();
+        } catch (error) {
+            weatherByDate = {};
+        }
+        for (const cell of calendarTable.querySelectorAll('td[data-date]')) {
+            if (weatherByDate[cell.dataset.date]) {
+                cell.append(document.createElement('br'), document.createTextNode(weatherByDate[cell.dataset.date]));
+            }
+        }
+    }
+
     async function colorCalendarByHolidays() {
         const calendarTable = document.querySelector('.calendar-table');
         const from = calendarTable.dataset.from;
@@ -107,11 +126,14 @@
 
             if (holidays[date]) {
                 cell.style.backgroundColor = '#fff2cc';
+                cell.style.color = '#0f172a';
                 cell.title = holidays[date];
             } else if (dayOfWeek === 0) {
                 cell.style.backgroundColor = '#fce4ec';
+                cell.style.color = '#0f172a';
             } else if (dayOfWeek === 6) {
                 cell.style.backgroundColor = '#e3f2fd';
+                cell.style.color = '#0f172a';
             }
         }
     }
@@ -119,5 +141,6 @@
     reorderCalendarToMondayStart();
     insertTodosIntoCalendar();
     colorCalendarByHolidays();
+    insertWeatherIntoCalendar();
 </script>
 </html>
