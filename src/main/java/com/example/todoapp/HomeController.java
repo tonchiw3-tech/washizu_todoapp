@@ -27,6 +27,11 @@ public class HomeController {
         return "index";
     }
 
+    @GetMapping("/mcp")
+    public String mcpTools() {
+        return "mcp";
+    }
+
     @GetMapping("/todos")
     public String todos(@RequestParam(name = "keyword", defaultValue = "") String keyword,
                         @RequestParam(name = "category", defaultValue = "") String category,

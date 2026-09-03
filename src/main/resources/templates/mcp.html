@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCP道具一覧</title>
+    <style>
+        body { margin: 0; padding: 24px; color: #102a43; font-family: Arial, sans-serif; background: #fff; }
+        .card { max-width: 720px; margin: 0 auto; padding: 28px; border: 1px solid #d9e2ec; border-radius: 14px; box-shadow: 0 3px 10px #102a4320; }
+        h1 { font-size: 22px; margin: 0 0 22px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #9fb3c8; padding: 10px; text-align: left; }
+        th { background: #f0f4f8; }
+        td:first-child { width: 28%; }
+    </style>
+</head>
+<body>
+<main class="card">
+    <h1>🛠 道具8つ（こうなる例）</h1>
+    <table>
+        <thead><tr><th>道具の名前</th><th>何をするか</th></tr></thead>
+        <tbody>
+        <tr><td>list_todos</td><td>一覧を返す</td></tr>
+        <tr><td>get_todo</td><td>1件を返す</td></tr>
+        <tr><td>add_todo</td><td>1件足す</td></tr>
+        <tr><td>update_todo</td><td>1件を直す</td></tr>
+        <tr><td>complete_todo</td><td>完了にする</td></tr>
+        <tr><td>delete_todo</td><td>1件を消す</td></tr>
+        <tr><td>find_free_days</td><td>空いている日を返す</td></tr>
+        <tr><td>summarize_week</td><td>期間の件数・ジャンルの内訳・期限切れの数を返す</td></tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>
